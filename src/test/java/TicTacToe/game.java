@@ -1,8 +1,5 @@
 package TicTacToe;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -23,36 +20,31 @@ public class game {
         }
     }
 
-    public void startGame() {
-        game game = new game();
-        game.fillWithHyphens();
-
-    }
 
     public Object caseWinForX() {
-        String x = xMovements.toString();
+        String x = xMovements.stream().sorted().toList().toString();
         return x;
     }
+
     public Object caseWinForY() {
-        String y = yMovements.toString();
+        String y = yMovements.stream().sorted().toList().toString();
         return y;
     }
 
-
-    public void endGame() throws IOException {
+    public boolean endGame() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src/test/java/winCases.csv"));
         String s = br.readLine();
         for (int i = 0; i < 8; i++) {
             if (s.equals(caseWinForX())) {
                 System.out.println("X won the game");
-                System.exit(0);
+                return true;
             } else if (s.equals(caseWinForY())) {
-                System.out.println("Y won the game.");
-                System.exit(0);
+                System.out.println("O won the game.");
+                return true;
             }
             s = br.readLine();
         }
-
+        return false;
     }
 
     public void place(int position) {
