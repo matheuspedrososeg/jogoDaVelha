@@ -55,6 +55,9 @@ public class game {
             }
             s = br.readLine();
         }
+        if (posList.size() >= 9) {
+            return true;
+        }
         return false;
     }
 
