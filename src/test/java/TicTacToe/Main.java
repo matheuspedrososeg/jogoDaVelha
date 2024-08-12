@@ -43,6 +43,7 @@ public class Main {
             System.out.println("Where do you wish to place?");
             int opt = scanner.nextInt();
             game.place(opt);
+
             game.print(game.pos);
         }
         System.exit(0);

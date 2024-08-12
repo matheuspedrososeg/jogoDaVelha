@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class game {
     String[][] pos = new String[3][3];
@@ -20,25 +21,35 @@ public class game {
         }
     }
 
-
-    public Object caseWinForX() {
-        String x = xMovements.stream().sorted().toList().toString();
-        return x;
+    public boolean equalsToList(String s, List<String> list) {
+        int cnt = 0;
+        for (int i = 0; i < list.size(); i++) {
+            if (s.contains(list.get(i))) {
+                cnt++;
+            }
+            if (cnt >= 3) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public Object caseWinForY() {
-        String y = yMovements.stream().sorted().toList().toString();
-        return y;
+    public List<String> caseWinForX() {
+        return xMovements.stream().sorted().toList();
+    }
+
+    public List<String> caseWinForY() {
+        return yMovements.stream().sorted().toList();
     }
 
     public boolean endGame() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src/test/java/winCases.csv"));
         String s = br.readLine();
         for (int i = 0; i < 8; i++) {
-            if (s.equals(caseWinForX())) {
+            if (equalsToList(s, caseWinForX())) {
                 System.out.println("X won the game");
                 return true;
-            } else if (s.equals(caseWinForY())) {
+            } else if (equalsToList(s, caseWinForY())) {
                 System.out.println("O won the game.");
                 return true;
             }
@@ -48,6 +59,7 @@ public class game {
     }
 
     public void place(int position) {
+        Scanner scanner = new Scanner(System.in);
         turn++;
         if (position > 0 && position < 4 && !posList.contains(position)) {
             if (player()) {
@@ -84,7 +96,11 @@ public class game {
 
             }
         } else {
+
             System.out.println("Position invalid or position has already been taken.");
+            turn--;
+            int newPos = scanner.nextInt();
+            place(newPos);
         }
     }
 
