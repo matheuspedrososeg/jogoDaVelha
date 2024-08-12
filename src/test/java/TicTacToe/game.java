@@ -21,6 +21,8 @@ public class game {
         }
     }
 
+    // checks to see if the winCases.csv is equal to the positions taken by the player.
+    // if counter higher than 3, it means that the player has won, because 3 elements of the list are equal to the winning case's elements.
     public boolean equalsToList(String s, List<String> list) {
         int cnt = 0;
         for (int i = 0; i < list.size(); i++) {
@@ -34,6 +36,9 @@ public class game {
         return false;
     }
 
+
+    // sorts the lists in ascending order to make it possible to verify wheter the list
+    // contains the positions required to win or not.
     public List<String> caseWinForX() {
         return xMovements.stream().sorted().toList();
     }
@@ -42,6 +47,7 @@ public class game {
         return yMovements.stream().sorted().toList();
     }
 
+    // verifies if the game has met the requirements to end.
     public boolean endGame() throws IOException {
         BufferedReader br = new BufferedReader(new FileReader("src/test/java/winCases.csv"));
         String s = br.readLine();
@@ -56,6 +62,7 @@ public class game {
             s = br.readLine();
         }
         if (posList.size() >= 9) {
+            System.out.println("The game resulted in a draw.");
             return true;
         }
         return false;

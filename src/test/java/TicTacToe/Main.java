@@ -14,7 +14,13 @@ public class Main {
         // 4 / 5 / 6
         // 7 / 8 / 9
     }
+
+    // startGame method is in the main class because for some reason it doesnt work when located in game class.
+    // while endGame hasnt returned true, the program continues to ask the player for a position
     public void startGame() throws IOException {
+
+        System.out.println("To place a letter, input the number which corresponds to the desired position.");
+        System.out.println("1 / 2 / 3\n4 / 5 / 6\n7 / 8 / 9 \n");
         Scanner scanner = new Scanner(System.in);
         game game = new game();
         game.fillWithHyphens();
